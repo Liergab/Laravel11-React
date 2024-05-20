@@ -1,5 +1,6 @@
 import React from 'react'
 import TaskForm from './form/TaskForm'
+import Table from './table/Table'
 
 const Main = () => {
   return (
@@ -12,7 +13,13 @@ const Main = () => {
             </div>
             <TaskForm/>
         </div>
-        <div className="flex-1 bg-gray-800">task</div>
+        <div className="flex-1 p-4">
+            <div>
+                <h1 className="text-2xl font-bold text-center">List of task 📋 </h1>
+            </div>
+            <Table/>
+            
+        </div>
     </div>
    </section>
   )

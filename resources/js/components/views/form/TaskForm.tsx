@@ -1,24 +1,36 @@
-import React from 'react'
+import * as React from 'react'
 import apiService from '../../services/apServices';
-
+import {toast} from 'react-hot-toast'
+import { TaskContext } from '../../context/TaskContext';
 const TaskForm = () => {
     const[title, setTitle] = React.useState<string>('');
     const[description, setDesc] = React.useState<string>('');
+    const{updateContextData} = React.useContext(TaskContext)
    
     
-        const handleSubmit = () => {
-            apiService
-              .post("api/save-task", {
-                title,
-                description,
-              })
-              .then((res) => {
-              console.log(res)
-              });
-          };
+        const handleSubmit =  async() => {
+            try {
+              const res = await apiService
+                .post("api/save-task", {
+                  title,
+                  description,
+                })
+                
+                toast.success(res.data.message)
+                setTitle('')
+                setDesc('')
+                updateContextData();
 
-       
-    
+            } catch (error) {
+              if(error.response.data.errors.title){
+                toast.error(error.response.data.errors.title.toString())
+              }else{
+                toast.error(error.response.data.errors.description.toString())
+              }
+             
+             
+            }
+        };
   return (
     <div className="mt-14 p-10 border-2 border-white rounded-xl ">
      <div action="" className="flex flex-col space-y-4 items-center justify-center">

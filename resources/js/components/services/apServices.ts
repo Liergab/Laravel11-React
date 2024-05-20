@@ -2,8 +2,6 @@ import axios from "axios";
 
 const API_BASE_URL = (window as any).env.API_BASE_URL;
 
-//  (window as any).env.API_BASE_URL;
-
 const apiService = axios.create({
   baseURL: API_BASE_URL,
   headers: {
